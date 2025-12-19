@@ -1,0 +1,8 @@
+POST http://localhost/ahdini/backend/routes/auth.php?action=register
+
+{
+    "first_name": "Yacine",
+    "last_name": "  Bouregaa",
+    "password": "bilalbou3lem@2025",
+    "email": "bouregaayacine31@gmail.com"
+}

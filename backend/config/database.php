@@ -1,6 +1,6 @@
 <?php 
 class Database {
-    private $host = "loclhost";
+    private $host = "localhost";
     private $db_name= "ahdini";
 
     private $username = "root";

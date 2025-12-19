@@ -1,15 +1,21 @@
 <?php
 
-require_once __DIR__ . '/../models/User.php';
-require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../models/User.php';//import User model
+require_once __DIR__ . '/../config/database.php';//import database connection
 
-class AuthController {
+class AuthController {//controller for authentication
     private $user;
     public function __construct($db){
         $this->user =new User($db);
     }
+    
+    //user registration
     public function register (){
-        $data = json_decode(file_get_contents("php://input"),true);
+        $data = json_decode(file_get_contents("php://input"),true);//get JSON input data
+        
+    //secure registeration
+    
+    //validate input
         if (
             empty ($data ['first_name'])||
             empty ($data ['last_name'])||
@@ -23,9 +29,26 @@ class AuthController {
             ]);
             return;
         }
+      //validate email format
+        if (!filter_var($data['email
+        '], FILTER_VALIDATE_EMAIL)){
+            echo json_encode ([
+                "status"=>"error",
+                "message"=>"Invalide email format"
+            ]);
+        }
+
+//validate password length
+if (strlen ($data['password)']) <8){
+    echo json_encode([
+        "status"=>"error",
+        "message"=> "password must be at least 8 characters long" 
+    ]);
+}
+//check if email already exists
 
         if ($this->user->emailExists($data['email'])){
-            echo json_encode ([
+            echo json_encode  ([
                 "status"=>"error",
                 "message"=>"Email already exists"
             ]);
@@ -43,4 +66,42 @@ class AuthController {
             "message"=>"user registered succesfully"
         ]);
     }
+
+    //login user
+public function login(){
+    $data = json_decode(file_get_contents("php://input"),true) ;
+
+    if (
+        empty ($data ['email'])||
+        empty ($data['password'])
+    ){
+        echo json_encode([
+            "status "=>"error",
+            "message"=>"please provide email and password"
+        ]);
+
+        return;
+    }
+
+    //verify user credentials
+    $userRecord =$this->user->getUserByEmail($data['email']);
+    if($userRecord && password_verify($data['password'], $userRecord['password'])){
+        echo json_encode ([
+            "status"=>"success",
+            "message"=>"your are loged in successfully",
+        
+            "user"=>[
+'id'=>$userRecord['id'],
+'name'=>$userRecord['first_name']. " ".$userRecord['last_name']
+        ]
+        ]);
+
+        
+    }else{
+        echo json_encode ([
+            "status"=>"error",
+            "message"=>"Invalid email or password"
+        ]);
+    }
+}
 }

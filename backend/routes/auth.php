@@ -13,6 +13,8 @@ if ($action ==='register'){
     $controller->register();
 } else if ($action ==='login'){
     $controller->login();
+}else if ($action ==='logout'){
+    $controller->logout();
 }
 else {
     echo json_encode ([

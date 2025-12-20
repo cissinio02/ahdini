@@ -84,9 +84,17 @@ public function login(){
         return;
     }
 
-    //verify user credentials
+    //get user data by email from model
     $userRecord =$this->user->getUserByEmail($data['email']);
     if($userRecord && password_verify($data['password'], $userRecord['password'])){
+        if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
+        session_regenerate_id(true);//prevent session fixation attacks
+        $_SESSION['user_id'] = $userRecord['id'];
+        $_SESSION['email'] = $userRecord['email'];
+        $_SESSION['is_logged_in'] = true;
+        $_SESSION['role'] = $userRecord['role'] ?? 'user';//store user role in session
         echo json_encode ([
             "status"=>"success",
             "message"=>"your are loged in successfully",
@@ -105,24 +113,20 @@ public function login(){
         ]);
     }
 }
-if (userRecord && password_verify($data['password'], $userRecord['password'])){
-    $_SESSION['user_id'] = $userRecord['id'];
-    $_SESSION['eamail'] = $userRecord['email'];
-    $_SESSION['is_logged_in'] = true;
 
-    echo json_encode([
-        "status"=>"succes",
-        "message"=>"you are logged in successfully",
-    ])
-}
 
 //logout user
 public function logout(){
+     if(session_status() == PHP_SESSION_NONE){
+            session_start();
+        }
     session_unset();//remove all session variables
     session_destroy();//destroy the session
+
     echo json_encode([
         "status"=>"success",
-        "message"=>"you have been logged out successfully"
+        "message"=>"you have been logged out successfully . No redirect page found yet "
     ]);
+      exit();
 }
 }

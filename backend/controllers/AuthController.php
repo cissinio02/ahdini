@@ -4,6 +4,7 @@ require_once __DIR__ . '/../models/User.php';//import User model
 require_once __DIR__ . '/../config/database.php';//import database connection
 
 class AuthController {//controller for authentication
+    //initialize User model
     private $user;
     public function __construct($db){
         $this->user =new User($db);
@@ -103,5 +104,25 @@ public function login(){
             "message"=>"Invalid email or password"
         ]);
     }
+}
+if (userRecord && password_verify($data['password'], $userRecord['password'])){
+    $_SESSION['user_id'] = $userRecord['id'];
+    $_SESSION['eamail'] = $userRecord['email'];
+    $_SESSION['is_logged_in'] = true;
+
+    echo json_encode([
+        "status"=>"succes",
+        "message"=>"you are logged in successfully",
+    ])
+}
+
+//logout user
+public function logout(){
+    session_unset();//remove all session variables
+    session_destroy();//destroy the session
+    echo json_encode([
+        "status"=>"success",
+        "message"=>"you have been logged out successfully"
+    ]);
 }
 }

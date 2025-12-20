@@ -1,4 +1,6 @@
 <?php 
+
+session_start();
 header("Content-Type: application/json; charset=UTF-8");
 require_once 'config/database.php';
 echo json_encode([

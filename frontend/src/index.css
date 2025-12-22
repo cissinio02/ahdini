@@ -2,5 +2,29 @@
     --primary-color:#8b0f0f;
     --secondary-color:#c9a55a;
     --background-gray:#00000014;/*color for text fields background*/
-    --text-color:#1e1b1a
+    --text-color:#1e1b1a;
+    --background-white:##ffffff;/*main background color*/
+    --border-form-color:#00000014;/*border color for text fields and form elements*/
+}
+
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body{
+    background-color:var(--background-white) ;
+    color: var(--text-color);
+}
+
+button{
+    cursor: pointer;
+    border:none;
+    outline:none;
+}
+
+input{
+    outline:none;
 }

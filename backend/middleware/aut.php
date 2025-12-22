@@ -15,7 +15,6 @@ function checkAuth() {
         exit;
     }
 }
-
 // 2. Middleware to check if user is Admin
 function checkAdmin() {
     
@@ -31,3 +30,4 @@ function checkAdmin() {
         exit();
     }
 }
+

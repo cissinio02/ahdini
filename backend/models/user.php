@@ -3,7 +3,6 @@
     private $db;
     public function __construct($db){
         $this->db =$db;//initialize database connection
-
     }
 
     //check if email exists

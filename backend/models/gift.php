@@ -36,4 +36,34 @@ class Gift {
         $data['image']
     ]);
  }
+
+   //delete gift by id
+   public function delete($id){
+      Auth::checkAdmin();
+      $stmt = $this->db->prepare("DELETE FROM gift WHERE id = ?");
+      return $stmt->execute([$id]);
+   }
+
+   //update gift by id
+   public function update($id, $data){
+      Auth::checkAdmin();
+      $stmt = $this->db->prepare(
+          "UPDATE gift SET title=?, description=?, price=?, category=?, image=? WHERE id=?"
+      );
+      return $stmt->execute([
+          $data['title'],
+          $data['description'],
+          $data['price'],
+          $data['category'],
+          $data['image'],
+          $id
+      ]);
+   }
+
+   //get gift by id
+   public function Read($id){
+      $stmt = $this->db->prepare("SELECT * FROM gift WHERE id = ?");
+      $stmt->execute([$id]);
+      return $stmt->fetch(PDO::FETCH_ASSOC);
+   }
 }

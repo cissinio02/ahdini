@@ -34,4 +34,36 @@ public function addGift(){
             ]);
         }
 }
+
+public function deleteGift($id){
+      checkAuth();
+        $result=$this->giftModel->delete($id);
+        if($result){
+            echo json_encode ([
+                "status"=>"success",
+                "message"=>"Gift deleted successfully"
+            ]);
+        }else{
+            echo json_encode ([
+                "status"=>"error",
+                "message"=>"Failed to delete gift"
+            ]);
+        }
+}
+public function updateGift($id){
+      checkAuth();
+        $data=json_decode(file_get_contents("php://input"),true);
+        $result=$this->giftModel->update($id, $data);
+        if($result){
+            echo json_encode ([
+                "status"=>"success",
+                "message"=>"Gift updated successfully"
+            ]);
+        }else{
+            echo json_encode ([
+                "status"=>"error",
+                "message"=>"Failed to update gift"
+            ]);
+        }
+}
 }

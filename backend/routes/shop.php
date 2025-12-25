@@ -15,6 +15,12 @@ if($action=='get_gifts'){
 }else if($action=='add_gift'){
     $Controller->addGift();
 }
+else if($action=='delete_gift' && isset($_GET['id'])){
+    $Controller->deleteGift($_GET['id']);
+}
+else if($action=='update_gift' && isset($_GET['id'])){
+    $Controller->updateGift($_GET['id']);
+}
 else{
     echo json_encode ([
         "status"=>"error",

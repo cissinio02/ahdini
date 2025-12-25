@@ -1,4 +1,4 @@
-.loginContainer {
+.registerContainer{
     display: flex;
     min-height: 100vh;
     width: 100vw;
@@ -6,9 +6,8 @@
     padding: 0;
     overflow: hidden;
 }
-/*------HERO SECTION START------*/
-.heroSection {
-    flex: 1; 
+.heroSection{
+   flex: 1; 
     background-color: var(--primary-color);
     color: white;
     display: flex;
@@ -19,6 +18,15 @@
     position: relative;
 
 }
+.formHeader{
+    background:rgba(255,255,255,0.08);
+    display:inline-block;
+    padding:10px 14px;
+    border-radius:8px;
+    font-weight:700;
+    margin-bottom:24px
+}
+
 .dots{
    position: absolute;
     top: 5px;
@@ -30,19 +38,16 @@
     z-index: 0;
     pointer-events: none;
 }
-    
 
-
-.heroSection h1 {
-    font-size: 40px;
+.heroSection h1{
+      font-size: 40px;
     line-height: 1;
     margin-bottom: 2rem;
     max-width: 500px;
       font-weight: 800;
 }
-
-.heroSection p {
-    font-size: 1rem;
+.heroSection p{
+   font-size: 1rem;
     line-height: 1.6;
     opacity: 0.9;
     max-width: 450px;
@@ -103,34 +108,30 @@
     margin-right: 15px;
 }
 /*------HERO SECTION START------*/
-/*------FORM SECTION START------*/
-.formSection {
+
+.formSection{
     flex: 1;
     background-color: var(--background-white);
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
-.formSection h2{
-        font-size: 40px;
+.registerForm{
+    width:100%;
+    max-width:420px;
+    display:flex;
+    flex-direction:column;
+    gap:16px
+}
+.registerForm h2{
+     font-size: 40px;
     margin-bottom: 0;
     color: #1e1b1a;
     margin-top: -0px;
     text-align: center;
 }
 
-
-
-.loginForm {
-    width: 100%;
-    max-width: 360px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.formSection .loginForm p{
+.formSection .registerForm p{
 
     margin-top: 1rem;
     font-size: 1rem;
@@ -139,81 +140,30 @@
     
 }
 
-.formSection .loginForm p a{
+.formSection .registerForm p a{
     color: var(--primary-color);
     text-decoration: none;
     font-weight: 600;
 }
-.formSection .loginForm p a:hover{
+.formSection .registerForm p a:hover{
     text-decoration: underline;
     
 }
 
-.forgotPassword {
-    text-align: right;
-    font-size: 0.9rem;
-    color: #c0bdbc;
+.registerForm input[type=checkbox]
+{
+    width:18px;
+    height:18px
+}
+
+label  a{
+    color: var(--primary-color);
     text-decoration: none;
-    font-weight: 600;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    display: block;
 }
-
-.forgotPassword:hover {
+label  a:hover{
     text-decoration: underline;
-}
-
-
-
-.inputGroup {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1.5rem;
-    text-align: left;
-}
-
-
-.formGroup input {
-   outline: none;
-    font-size: 15px;
-    padding: 10px;
-    border-radius: 8px;
-    width: 360px;
-  border: solid 1px #e8e6e5;
-  
-}
-
-.formGroup input:focus {
     
-    box-shadow: 0 0 8px rgba(112, 11, 11, 0.3);
-    transform: translateY(-2px);
 }
-
-
-
-.loginBtn {
-    width: 360px;
-    padding: 14px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin-top: 1rem;
-}
-
-.loginBtn:hover {
-    transform: scale(1.02);
-    background-color: #7a0e0e;
-}
-    
-
-
-/*------FORM SECTION END------*/
-
 
 @keyframes slideInLeft {
     from {
@@ -248,13 +198,13 @@
     opacity: 0; 
 }
 
-.loginForm {
+.registerForm {
     animation: slideInRight 0.8s ease-out forwards;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .loginContainer { flex-direction: column; }
+    .registerContainer { flex-direction: column; }
     .heroSection { order: 1; padding: 40px 6%; min-height: 40vh; }
     .formSection { order: 2; padding: 40px 6%; min-height: 60vh; }
     .heroSection h1 { font-size: 34px; max-width: 100%; }
@@ -263,7 +213,7 @@
     .logoContainer { position: relative; top: 0; left: 0; margin-bottom: 16px; }
     .dots { width: 300px; height: 300px; right: -40px; top: 10px; background-size: 30px 30px; opacity: 0.6 }
     .formSection { align-items: flex-start; }
-    .loginForm { max-width: 480px; }
+    .registerForm { max-width: 480px; }
     .formGroup input, .loginBtn { width: 100%; }
 }
 
@@ -275,7 +225,7 @@
     .dots { display: none; }
     .logoContainer { left: 4%; }
     .formSection { padding: 32px 4%; }
-    .loginForm { padding: 8px 0; }
+    .registerForm { padding: 8px 0; }
 }
 
 @media (max-width: 420px) {
@@ -285,6 +235,6 @@
     .testimonialCard { max-width: 100%; left: 0; bottom: 0; }
     .formSection { padding: 20px; }
     .formGroup input { padding: 10px; font-size: 14px; }
-    .loginBtn { padding: 12px; font-size: 0.95rem; }
+    .registerBtn { padding: 12px; font-size: 0.95rem; }
 }
 

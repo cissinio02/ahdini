@@ -11,49 +11,77 @@ class AuthController {//controller for authentication
     }
     
     //user registration
-    public function register (){
-        $data = json_decode(file_get_contents("php://input"),true);//get JSON input data
+    public function register ($data = null){
+        if ($data === null) {
+            $data = json_decode(file_get_contents("php://input"), true); // get JSON input data
+        }
         
     //secure registeration
     
     //validate input
-        if (
-            empty ($data ['first_name'])||
-            empty ($data ['last_name'])||
-            empty ($data ['email'])||
-            empty ($data ['password'])
+        // Validate required fields and collect field-specific errors
+        $errors = [];
+        if (empty($data['first_name'])) $errors['first_name'] = 'First name is required';
+        if (empty($data['last_name'])) $errors['last_name'] = 'Last name is required';
+        if (empty($data['email'])) $errors['email'] = 'Email is required';
+        if (empty($data['password'])) $errors['password'] = 'Password is required';
 
-        ){
-            echo json_encode([
-                "status"=>"error",
-                "message"=>"All fields are required"
-            ]);
-            return;
+        if (!empty($errors)) {
+            return [
+                'status' => 'error',
+                'message' => 'Validation failed',
+                'errors' => $errors
+            ];
         }
       //validate email format
-        if (!filter_var($data['email
-        '], FILTER_VALIDATE_EMAIL)){
-            echo json_encode ([
-                "status"=>"error",
-                "message"=>"Invalide email format"
-            ]);
-        }
+                if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)){
+                    return [
+                                'status'=>'error',
+                                'message'=>'Invalid email format',
+                                'errors' => ['email' => 'Invalid email format']
+                        ];
+                }
 
 //validate password length
-if (strlen ($data['password)']) <8){
-    echo json_encode([
-        "status"=>"error",
-        "message"=> "password must be at least 8 characters long" 
-    ]);
+if (strlen($data['password']) < 8) {
+    return [
+        'status' => 'error',
+        'message' => 'Password too short',
+        'errors' => ['password' => 'Password must be at least 8 characters long']
+    ];
+}
+
+if (!preg_match('/[A-Z]/', $data['password'])) {
+    return [
+        'status' => 'error',
+        'message' => 'Weak password',
+        'errors' => ['password' => 'Password must contain at least one uppercase letter']
+    ];
+}
+
+if (!preg_match('/[0-9]/', $data['password'])) {
+    return [
+        'status' => 'error',
+        'message' => 'Weak password',
+        'errors' => ['password' => 'Password must contain at least one number']
+    ];
+}
+
+if (!preg_match('/[\\W]/', $data['password'])) {
+    return [
+        'status' => 'error',
+        'message' => 'Weak password',
+        'errors' => ['password' => 'Password must contain at least one special character']
+    ];
 }
 //check if email already exists
 
         if ($this->user->emailExists($data['email'])){
-            echo json_encode  ([
-                "status"=>"error",
-                "message"=>"Email already exists"
-            ]);
-            return;
+            return [
+                'status'=>'error',
+                'message'=>'Email already exists',
+                'errors' => ['email' => 'Email already exists']
+            ];
         }
 
         $this->user->create(
@@ -62,55 +90,54 @@ if (strlen ($data['password)']) <8){
             $data['email'],
             $data['password']
         );
-        echo json_encode ([
+        return [
             "status" => "success",
             "message"=>"user registered succesfully"
-        ]);
+        ];
     }
 
     //login user
-public function login(){
-    $data = json_decode(file_get_contents("php://input"),true) ;
-
-    if (
-        empty ($data ['email'])||
-        empty ($data['password'])
-    ){
-        echo json_encode([
-            "status "=>"error",
-            "message"=>"please provide email and password"
-        ]);
-
-        return;
+public function login($email = null, $password = null){
+    if ($email !== null && $password !== null) {
+        $data = [
+            'email' => $email,
+            'password' => $password
+        ];
+    } else {
+        $data = json_decode(file_get_contents("php://input"), true);
     }
 
-    //get user data by email from model
-    $userRecord =$this->user->getUserByEmail($data['email']);
-    if($userRecord && password_verify($data['password'], $userRecord['password'])){
-        if(session_status() == PHP_SESSION_NONE){
+    if (empty($data['email']) || empty($data['password'])) {
+        return [
+            "status" => "error",
+            "message" => "please provide email and password"
+        ];
+    }
+
+    $userRecord = $this->user->getUserByEmail($data['email']);
+    if ($userRecord && password_verify($data['password'], $userRecord['password'])) {
+        if (session_status() == PHP_SESSION_NONE) {
             session_start();
         }
-        session_regenerate_id(true);//prevent session fixation attacks
+        session_regenerate_id(true);
         $_SESSION['user_id'] = $userRecord['id'];
         $_SESSION['email'] = $userRecord['email'];
         $_SESSION['is_logged_in'] = true;
-        $_SESSION['role'] = $userRecord['role'] ?? 'user';//store user role in session
-        echo json_encode ([
-            "status"=>"success",
-            "message"=>"your are loged in successfully",
-        
-            "user"=>[
-'id'=>$userRecord['id'],
-'name'=>$userRecord['first_name']. " ".$userRecord['last_name']
-        ]
-        ]);
+        $_SESSION['role'] = $userRecord['role'] ?? 'user';
 
-        
-    }else{
-        echo json_encode ([
-            "status"=>"error",
-            "message"=>"Invalid email or password"
-        ]);
+        return [
+            "status" => "success",
+            "message" => "you are logged in successfully",
+            "user" => [
+                'id' => $userRecord['id'],
+                'name' => $userRecord['first_name'] . " " . $userRecord['last_name']
+            ]
+        ];
+    } else {
+        return [
+            "status" => "error",
+            "message" => "Invalid email or password"
+        ];
     }
 }
 
@@ -123,10 +150,9 @@ public function logout(){
     session_unset();//remove all session variables
     session_destroy();//destroy the session
 
-    echo json_encode([
+    return [
         "status"=>"success",
         "message"=>"you have been logged out successfully . No redirect page found yet "
-    ]);
-      exit();
+    ];
 }
 }

@@ -1,5 +1,5 @@
 <?php
-header('access-control-allow-origin: http://localhost:3000');//allow requests from frontend
+header('access-control-allow-origin: http://localhost:5173');//allow requests from frontend
 header('access-control-allow-credentials: true');//allow cookies
 header('content-type: application/json');//response type
 

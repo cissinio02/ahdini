@@ -1,11 +1,30 @@
-import React from "react";  
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
+import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
+import Forgot from './pages/Forgot/Forgot';
+import Terms from './pages/terms/terms';
+import ToastPro from './components/UI/ToastPro';
 
+ 
 function App() {
-return(
-  <div>
-    <h1>ahdini</h1>
-  </div>
-)
+    return (
+    
+        <Router>
+            <div className="App">
+              <ToastPro />
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/forgot" element={<Forgot />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
+        </Router>
+    
+    
+    );
 }
 
-export default App;
+export default App; 

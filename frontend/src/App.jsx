@@ -4,6 +4,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import Forgot from './pages/Forgot/Forgot';
 import Terms from './pages/terms/terms';
+import Home from './pages/Home/Home';
 import ToastPro from './components/UI/ToastPro';
 
  
@@ -14,6 +15,7 @@ function App() {
             <div className="App">
               <ToastPro />
               <Routes>
+                <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgot" element={<Forgot />} />

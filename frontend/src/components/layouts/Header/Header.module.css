@@ -56,6 +56,27 @@
 .navLink:hover {
   color: var(--primary-color, #a1241f);
 }
+ 
+
+.partnerLink {
+  background: linear-gradient(120deg, #666 30%, #d4af37 50%, #666 70%);
+  background-size: 200% auto;
+  color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  -webkit-background-clip: text;
+  font-weight: bold;
+  animation: shine 3s linear infinite;
+}
+
+.partnerLink:hover{
+  color: #a1241f;
+  text-decoration: none;
+}
+
+@keyframes shine {
+  to { background-position: 200% center; }
+}
 
 .buttons {
   display: flex;
@@ -99,6 +120,26 @@
   background-color: #8a1d18;
   transform: translateY(-2px);
 }
+
+.logoutBtn {
+  padding: 10px 24px;
+  background-color: var(--primary-color, #a1241f);
+  color: white;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.logoutBtn:hover {
+  background-color: #8a1d18;
+  transform: translateY(-2px);
+}
+
+
 
 @media (max-width: 1024px) {
   .container {

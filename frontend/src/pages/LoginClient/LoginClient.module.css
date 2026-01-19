@@ -1,0 +1,290 @@
+.loginContainer {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+/*------HERO SECTION START------*/
+.heroSection {
+    flex: 1; 
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 5%; 
+    text-align: left;
+    position: relative;
+
+}
+.dots{
+   position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 600px;
+    height: 600px;
+    background-image: radial-gradient(rgba(201, 165, 90) -5px, transparent 2px);
+    background-size: 50px 50px;
+    z-index: 0;
+    pointer-events: none;
+}
+    
+
+
+.heroSection h1 {
+    font-size: 40px;
+    line-height: 1;
+    margin-bottom: 2rem;
+    max-width: 500px;
+      font-weight: 800;
+}
+
+.heroSection p {
+    font-size: 1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    max-width: 450px;
+    font-weight: 500;
+
+}
+
+.logoContainer {
+    position: absolute;
+    top: 50px;
+    left: 5%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logoText{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+
+.testimonialCard {
+   background: rgba(255, 255, 255, 0.1);
+   backdrop-filter: blur(12px);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+   padding: 20px;
+    border-radius: 15px;
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    max-width: 500px;
+  
+}
+
+.testimonialCard p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+
+
+.userInfo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    margin-right: 15px;
+}
+/*------HERO SECTION START------*/
+/*------FORM SECTION START------*/
+.formSection {
+    flex: 1;
+    background-color: var(--background-white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formSection h2{
+        font-size: 40px;
+    margin-bottom: 0;
+    color: #1e1b1a;
+    margin-top: -0px;
+    text-align: center;
+}
+
+
+
+.loginForm {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formSection .loginForm p{
+
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #c0bdbc;
+    text-align: center;
+    
+}
+
+.formSection .loginForm p a{
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+.formSection .loginForm p a:hover{
+    text-decoration: underline;
+    
+}
+
+.forgotPassword {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #c0bdbc;
+    text-decoration: none;
+    font-weight: 600;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.forgotPassword:hover {
+    text-decoration: underline;
+}
+
+
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+
+.formGroup input {
+   outline: none;
+    font-size: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    width: 360px;
+  border: solid 1px #e8e6e5;
+  
+}
+
+.formGroup input:focus {
+    
+    box-shadow: 0 0 8px rgba(112, 11, 11, 0.3);
+    transform: translateY(-2px);
+}
+
+
+
+.loginBtn {
+    width: 360px;
+    padding: 14px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 1rem;
+}
+
+.loginBtn:hover {
+    transform: scale(1.02);
+    background-color: #7a0e0e;
+}
+    
+
+
+/*------FORM SECTION END------*/
+
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+
+.heroContent {
+    animation: slideInLeft 0.8s ease-out forwards;
+}
+
+.testimonialCard {
+    animation: slideInLeft 0.8s ease-out 0.3s forwards; 
+    opacity: 0; 
+}
+
+.loginForm {
+    animation: slideInRight 0.8s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .loginContainer { flex-direction: column; }
+    .heroSection { order: 1; padding: 40px 6%; min-height: 40vh; }
+    .formSection { order: 2; padding: 40px 6%; min-height: 60vh; }
+    .heroSection h1 { font-size: 34px; max-width: 100%; }
+    .heroSection p { max-width: 100%; }
+    .testimonialCard { position: static; margin-top: 20px; bottom: auto; left: auto; }
+    .logoContainer { position: relative; top: 0; left: 0; margin-bottom: 16px; }
+    .dots { width: 300px; height: 300px; right: -40px; top: 10px; background-size: 30px 30px; opacity: 0.6 }
+    .formSection { align-items: flex-start; }
+    .loginForm { max-width: 480px; }
+    .formGroup input, .loginBtn { width: 100%; }
+}
+
+@media (max-width: 768px) {
+    .heroSection { padding: 32px 5%; }
+    .heroSection h1 { font-size: 28px; }
+    .heroSection p { font-size: 0.95rem; }
+    .testimonialCard { padding: 16px; border-radius: 12px; }
+    .dots { display: none; }
+    .logoContainer { left: 4%; }
+    .formSection { padding: 32px 4%; }
+    .loginForm { padding: 8px 0; }
+}
+
+@media (max-width: 420px) {
+    .heroSection h1 { font-size: 22px; }
+    .heroSection p { font-size: 0.9rem; }
+    .logoText { font-size: 1.2rem; }
+    .testimonialCard { max-width: 100%; left: 0; bottom: 0; }
+    .formSection { padding: 20px; }
+    .formGroup input { padding: 10px; font-size: 14px; }
+    .loginBtn { padding: 12px; font-size: 0.95rem; }
+}
+

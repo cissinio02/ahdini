@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import styles from './LoginClient.module.css';
 import {logo_blanc} from '../../assets/icons/icons';
-import {chemsou} from '../../assets/images/images';
+import {user} from '../../assets/images/images';
 import api from '../../api/axios';
 import { showSuccessToast, showErrorToast } from '../../components/UI/ToastPro';
 import toast from 'react-hot-toast';
@@ -76,7 +76,7 @@ const Login = () => {
                         lifesaver for busy professionals."
                     </p>
                     <div className={styles.userInfo}>
-                        <img src={chemsou} alt="user" />
+                        <img src={user} alt="user" />
                         <div>
                             <strong>Chemsou B.</strong>
                             <span>Entrepreneur</span>

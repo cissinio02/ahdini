@@ -12,58 +12,58 @@ export default function Terms() {
         </header>
 
         <section className={styles.section}>
-          <h2>1. القبول (أدخل بالرجل اليمنى)</h2>
+          <h2>1. Acceptance of Terms</h2>
           <p>
-           باستعمالك لـ "أهديني"، راك تسيني بلي عاقل وموافق على واش كاين هنا. إذا ما عجبكش الحال، أغلق التيليفون وروح  قود، ما تكسر لناش راسنا.
+            By accessing or using "Ahdini," you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing this site.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>2. استعمال الخدمة (كون متربي)</h2>
+          <h2>2. User Conduct</h2>
           <p>
-            ممنوع البول والتكفات: السيت هذا للناس النقيين، أي واحد يخلي ريحتو ولا يدير الفوضى يبلوكيوه الجيران (الأدمين).
+            Users are expected to interact with the platform in a respectful manner. Any behavior that constitutes harassment, abuse, or disruption of service may lead to immediate suspension or termination of your account.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>ممنوع التقرعج</h2>
+          <h2>3. Privacy & Data Integrity</h2>
           <p>
-           أدخل أهدي وخرج، ما تبقاش تسقسي "هذا شكون؟" و "منين جاب الدراهم؟".
+            Users must respect the privacy of others. Unauthorized attempts to access personal data or investigate other users' private information are strictly prohibited.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>3. الملكية الفكرية (تاعنا وحدنا)</h2>
+          <h2>4. Intellectual Property</h2>
           <p>
-           امل واش تشوف هنا (كتيبة، تصاور، زواق) تاع "أهديني". إذا سرقت كاش حاجة، ندعيوا عليك في صلاة الفجر وما تربحش.
+            All content provided on "Ahdini," including text, graphics, logos, and software, is the property of the platform and is protected by international copyright laws. Unauthorized reproduction or distribution is strictly prohibited.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>4. المسؤولية (ما دخلناش)</h2>
+          <h2>5. Limitation of Liability</h2>
           <p>
-            ذا صراتلك كاش حاجة، ولا طاحلك التيليفون في الماء وأنت تستعمل في "أهديني"، ما تجيش تطبطب عندنا. حنا خاطينا، نتا اللي حابس.
+            "Ahdini" shall not be held liable for any damages, including but not limited to loss of data or hardware damage, arising out of the use or inability to use the services provided on this website.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2>5. الخصوصية (سرّك في بير)</h2>
+          <h2>6. Privacy Policy</h2>
           <p>
-           معلوماتك عندنا في الأمان، ما نبيعوهم ما نمدوهم. بصح إذا جاو يسقسوا عليك الخطابة، هذيك حاجة وحدة أخرى.
+            Your personal information is handled with strict confidentiality. We do not sell or share your data with third parties except as required by law or to provide the essential functions of our service.
           </p>
         </section>
 
-          <section className={styles.section}>
-          <h2>6. التغييرات (كيما نحبوا)</h2>
+        <section className={styles.section}>
+          <h2>7. Amendments</h2>
           <p>
-          لقوانين هادو يتبدلو على حساب المورال. إذا نضنا غدوا بانتلنا، نقدرو نزيدو قانون
+            We reserve the right to revise these terms at any time without prior notice. By using this website, you are agreeing to be bound by the then-current version of these Terms of Service.
           </p>
         </section>
 
         <footer className={styles.footer}>
-          <p>Questions? Contact us at <a href="mailto:chemsou@gmail.com">support@ahdini.local</a></p>
+          <p>Questions? Contact us at <a href="mailto:support@ahdini.local">support@ahdini.local</a></p>
           <p>
-            <Link to="../Register">Return</Link>
+            <Link to="../Register">Return to Registration</Link>
           </p>
         </footer>
       </div>

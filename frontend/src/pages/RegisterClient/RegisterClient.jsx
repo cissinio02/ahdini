@@ -5,7 +5,7 @@ import Input from '../../components/UI/Input';
 import authService from '../../Services/authService';
 import { showSuccessToast, showErrorToast } from '../../components/UI/ToastPro';
 import {logo_blanc} from '../../assets/icons/icons';
-import {chemsou} from '../../assets/images/images';
+import {user} from '../../assets/images/images';
 import { Link } from 'react-router-dom';
 
 
@@ -72,7 +72,7 @@ export default function Register(){
              <div className={styles.testimonialCard}>
               <p>"Ahdini made my wife's anniversary unforgettable. The scheduling feature is a lifesaver for busy professionals."</p>
               <   div className={styles.userInfo}>
-       <img src={chemsou} alt="user"></img>
+       <img src={user} alt="user"></img>
        <div>
           <strong>Chemsou B.</strong>
           <span>Entrepreneur</span>

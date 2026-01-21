@@ -28,3 +28,40 @@ button{
 input{
     outline:none;
 }
+
+
+/*---------------------------------------------------*/
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.burst-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  pointer-events: none;
+}
+
+.particle {
+  position: absolute;
+  font-size: 1.2rem;
+  animation: fly-out 1s forwards ease-out;
+  opacity: 0;
+}
+
+/* توزيع عشوائي للاتجاهات */
+.p-0 { --x: -50px; --y: -60px; }
+.p-1 { --x: 50px;  --y: -60px; }
+.p-2 { --x: 0px;   --y: -80px; }
+
+@keyframes fly-out {
+  0% {
+    transform: translate(0, 0) scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x), var(--y)) scale(1.2);
+    opacity: 0;
+  }
+}

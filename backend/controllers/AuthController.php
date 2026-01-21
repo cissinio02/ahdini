@@ -84,7 +84,7 @@ if (!preg_match('/[\\W]/', $data['password'])) {
             ];
         }
 
-        $this->user->create(
+        $this->user->createClient(
             $data['first_name'],
             $data['last_name'],
             $data['email'],
@@ -123,7 +123,7 @@ public function login($email = null, $password = null){
         $_SESSION['user_id'] = $userRecord['id'];
         $_SESSION['email'] = $userRecord['email'];
         $_SESSION['is_logged_in'] = true;
-        $_SESSION['role'] = $userRecord['role'] ?? 'user';
+        $_SESSION['role'] = $userRecord['role'] ?? 'client';
 
         return [
             "status" => "success",
@@ -152,7 +152,7 @@ public function logout(){
 
     return [
         "status"=>"success",
-        "message"=>"you have been logged out successfully . No redirect page found yet "
+        "message"=>"you have been logged out successfully .  "
     ];
 }
 }

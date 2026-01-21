@@ -19,7 +19,7 @@ class GiftController{
 }
 
 public function addGift(){
-      checkAuth();  //check if user is authenticated do not remove it ****** security ******
+      checkAdmin();  //check if user is authenticated do not remove it ****** security ******
         $data=json_decode(file_get_contents("php://input"),true);
         $result=$this->giftModel->create($data);
         if($result){
@@ -36,7 +36,7 @@ public function addGift(){
 }
 
 public function deleteGift($id){
-      checkAuth();
+      checkAdmin();
         $result=$this->giftModel->delete($id);
         if($result){
             echo json_encode ([
@@ -51,7 +51,7 @@ public function deleteGift($id){
         }
 }
 public function updateGift($id){
-      checkAuth();
+      checkAdmin();
         $data=json_decode(file_get_contents("php://input"),true);
         $result=$this->giftModel->update($id, $data);
         if($result){

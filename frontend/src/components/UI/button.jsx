@@ -26,8 +26,8 @@ export default function Button({ children, variant = 'primary', className = '', 
 		},
 		secondary: {
 			background: '#fff',
-			color: '#374151',
-			border: '1px solid #e5e7eb',
+			color: 'var(--primary-color)',
+			border: '1px solid var(--primary-color)',
 		},
 		ghost: {
 			background: 'transparent',

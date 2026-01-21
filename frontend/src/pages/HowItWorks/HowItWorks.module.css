@@ -1,0 +1,255 @@
+.container {
+  width: 100%;
+  background-color: #fafafa;
+}
+
+/* Hero Section */
+.heroSection {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #fff;
+}
+
+.mainTitle {
+  font-size: 48px;
+  font-weight: bold;
+  color: #8b0000;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #666;
+  max-width: 600px;
+  margin: 0 auto 40px;
+  line-height: 1.6;
+}
+
+.watchBtn {
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+  text-decoration: none;
+}
+
+.watchBtn:hover {
+  background-color: #6b0000;
+}
+
+.playIcon {
+  font-size: 14px;
+}
+
+/* Steps Section */
+.stepsSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 40px;
+  padding: 80px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.step {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  will-change: transform, opacity;
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  animation: fadeUp 600ms cubic-bezier(0.22, 0.9, 0.36, 1) forwards;
+}
+
+.step:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-6px) scale(1.01);
+}
+
+.stepIcon {
+  font-size: 48px;
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background-color: #fde8e8;
+  border-radius: 50%;
+}
+
+.stepLabel {
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+.stepTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.stepDescription {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Animation Keyframes */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Animation Delays */
+.stepsSection .step:nth-child(1) {
+  animation-delay: 120ms;
+}
+
+.stepsSection .step:nth-child(2) {
+  animation-delay: 260ms;
+}
+
+.stepsSection .step:nth-child(3) {
+  animation-delay: 400ms;
+}
+
+/* Section ta3 About Ahdini */
+.aboutSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  padding: 100px 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 600ms cubic-bezier(0.22, 0.9, 0.36, 1), transform 600ms cubic-bezier(0.22, 0.9, 0.36, 1);
+}
+
+.aboutSection.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.aboutLabel {
+  color: #d4af37;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.aboutTitle {
+  font-size: 40px;
+  font-weight: bold;
+  color: #8b0000;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.aboutText {
+  font-size: 16px;
+  color: #666;
+  line-height: 1.8;
+  margin: 0;
+}
+
+.statsContainer {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+  margin-top: 30px;
+}
+
+.stat {
+  text-align: left;
+}
+
+.statNumber {
+  font-size: 32px;
+  font-weight: bold;
+  color: #8b0000;
+  margin: 0 0 8px 0;
+}
+
+.statLabel {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+
+.aboutImage {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.aboutImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive Shi (Yacine verify ida rani nichen fiha wla nn ;) Thanks!) */
+@media (max-width: 768px) {
+  .mainTitle {
+    font-size: 36px;
+  }
+
+  .heroSection {
+    padding: 60px 20px;
+  }
+
+  .stepsSection {
+    grid-template-columns: 1fr;
+    padding: 60px 20px;
+    gap: 30px;
+  }
+
+  .aboutSection {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 60px 20px;
+  }
+
+  .aboutTitle {
+    font-size: 28px;
+  }
+
+  .statsContainer {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}

@@ -13,6 +13,15 @@
         $stmt->execute([$email]);
         return $stmt->fetch() !==false;
     }
+
+    // Check if phone exists in 'vendor' table
+    public function phoneExists($phone) {
+        $query = "SELECT id FROM vendor WHERE shop_phone = :phone LIMIT 1";
+        $stmt = $this->db->prepare($query);
+        $stmt->bindParam(':phone', $phone);
+        $stmt->execute();
+        return $stmt->rowCount() > 0;
+    }
     
     //create new user
     public function createClient($first, $last, $email, $password){

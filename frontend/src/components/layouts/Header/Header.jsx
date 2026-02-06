@@ -45,13 +45,13 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <img src={logo_grenas} alt="Ahdini Logo" />
-          <span>Ahdini</span>
+          <Link to="/home" style={{ textDecoration: 'none' }}><span>Ahdini</span></Link>
         </div>
 
         {}
         {!user && (
           <div className={styles.partnerHeader}>
-            <Link to="/register-vendor" className={styles.partnerLink}>
+            <Link to="/registervendor" className={styles.partnerLink}>
               Become our Partner
             </Link>
           </div>

@@ -44,3 +44,5 @@ PHPMailer not installed; token: bb414d0588e697c361e406560a1ae5ae4f1d7ad3f5a17d8c
 {"time":"2026-01-19 21:02:12","endpoint":"forgot.php","origin":"http:\/\/localhost:5173","method":"POST","raw":"{\"email\":\"bouregaayacine31@gmail.com\"}"}
 Failed to persist token: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'ahdini.password_resets' doesn't exist
 PHPMailer not installed; token: d40d89eca596c4aaf89c7659e96eddb8c40373250a803101182affa41bddd368
+{"time":"2026-02-04 16:32:14","origin":"http:\/\/localhost:5173","method":"POST","raw":"{\"first_name\":{\"firstName\":\"hamou\",\"lastName\":\"alaa\",\"email\":\"alaa@gmail.com\",\"password\":\"Yasser0421\",\"shopName\":\"\",\"shopPhone\":\"\",\"shopLocation\":\"\",\"agree\":true}}","parsed":{"first_name":{"firstName":"hamou","lastName":"alaa","email":"alaa@gmail.com","password":"Yasser0421","shopName":"","shopPhone":"","shopLocation":"","agree":true}}}
+{"time":"2026-02-06 14:47:30","origin":"http:\/\/localhost:5173","method":"POST","raw":"{\"first_name\":\"\",\"last_name\":\"\",\"email\":\"\",\"password\":\"\"}","parsed":{"first_name":"","last_name":"","email":"","password":""}}

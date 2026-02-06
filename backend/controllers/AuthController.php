@@ -15,6 +15,15 @@ class AuthController {//controller for authentication
         if ($data === null) {
             $data = json_decode(file_get_contents("php://input"), true); // get JSON input data
         }
+
+        public function registerVendor($data) {
+        // 1. Validate mandatory fields
+        $required = ['firstName', 'lastName', 'email', 'password', 'shopName', 'shopPhone', 'shopLocation'];
+        foreach ($required as $field) {
+            if (empty($data[$field])) {
+                return ["status" => "error", "message" => "Please fill all required fields."];
+            }
+        }
         
     //secure registeration
     
@@ -77,11 +86,7 @@ if (!preg_match('/[\\W]/', $data['password'])) {
 //check if email already exists
 
         if ($this->user->emailExists($data['email'])){
-            return [
-                'status'=>'error',
-                'message'=>'Email already exists',
-                'errors' => ['email' => 'Email already exists']
-            ];
+            return ['status'=>'error','message'=>'Email already exists','errors' => ['email' => 'Email already exists']];
         }
 
         $this->user->createClient(
@@ -95,6 +100,11 @@ if (!preg_match('/[\\W]/', $data['password'])) {
             "message"=>"user registered succesfully"
         ];
     }
+
+    // 3. Check for Unique Phone
+        if ($this->userModel->phoneExists($data['shopPhone'])) {
+            return ["status" => "error", "message" => "This phone number is already registered to a shop."];
+        }
 
     //login user
 public function login($email = null, $password = null){

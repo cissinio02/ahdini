@@ -61,7 +61,7 @@ export default function Register(){
                    <div className={styles.logoContainer}>
                    
                    <img src={logo_blanc} alt ="Logo"></img>
-                   <span className={styles.logoText}>Ahdini</span>
+                  <Link to="/home" style={{ textDecoration: 'none' }}><span className={styles.logoText}>Ahdini</span></Link>
                    </div>
                    
                  

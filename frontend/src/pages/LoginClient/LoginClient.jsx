@@ -57,7 +57,9 @@ const Login = () => {
                 <div className={styles.dots}></div>
                 <div className={styles.logoContainer}>
                     <img src={logo_blanc} alt="Logo" />
-                    <span className={styles.logoText}>Ahdini</span>
+                   <Link to="/home" style={{ textDecoration: 'none' }}><span className={styles.logoText}>Ahdini</span></Link>
+                  
+                    
                 </div>
 
                 <h1>

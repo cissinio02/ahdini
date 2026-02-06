@@ -7,6 +7,7 @@ import Terms from './pages/terms/terms';
 import Home from './pages/Home/Home';
 import HowItWorks from './pages/HowItWorks/HowItWorks';
 import RegisterVendor from './pages/RegisterVendor/RegisterVendor';
+import Gifts from './pages/Gifts/Gifts';
 import ToastPro from './components/UI/ToastPro';
 
  
@@ -24,7 +25,8 @@ function App() {
                 <Route path="/terms" element={<Terms />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="/register-vendor" element={<RegisterVendor />} />
-
+                <Route path="/gifts" element={<Gifts />} />
+                <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>

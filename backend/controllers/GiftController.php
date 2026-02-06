@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/../middleware/auth.php'; //import authentication middleware
+require_once __DIR__ . '/../middleware/aut.php'; //import authentication middleware
 require_once __DIR__ . '/../models/gift.php';//import User model
 
 class GiftController{

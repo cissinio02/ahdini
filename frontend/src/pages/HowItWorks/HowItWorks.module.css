@@ -222,6 +222,115 @@
   display: block;
 }
 
+/* Promise Section */
+.promiseSection {
+  text-align: center;
+  padding: 80px 40px;
+  background-color: #fff;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.promiseTitle {
+  font-size: 40px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+.promiseSubtitle {
+  font-size: 16px;
+  color: #999;
+  margin: 0 0 50px 0;
+}
+
+.promiseCards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+}
+
+.promiseCard {
+  background-color: #fafafa;
+  padding: 40px 30px;
+  border-radius: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.promiseCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.promiseIcon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.promiseCardTitle {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 15px 0;
+}
+
+.promiseCardText {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA Section */
+.ctaSection {
+  background-color: #8b0000;
+  padding: 60px 40px;
+  text-align: center;
+  margin: 60px 40px;
+  border-radius: 12px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaContent {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.ctaTitle {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  margin: 0 0 15px 0;
+}
+
+.ctaSubtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin: 0 0 30px 0;
+  line-height: 1.6;
+}
+
+.ctaBtn {
+  background-color: #d4af37;
+  color: #333;
+  border: none;
+  padding: 14px 36px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-block;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+}
+
+.ctaBtn:hover {
+  background-color: #e5c158;
+  transform: scale(1.05);
+}
+
 /* Responsive Shi (Yacine verify ida rani nichen fiha wla nn ;) Thanks!) */
 @media (max-width: 768px) {
   .mainTitle {

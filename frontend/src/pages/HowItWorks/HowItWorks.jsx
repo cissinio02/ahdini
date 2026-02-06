@@ -5,6 +5,9 @@ import search from '../../assets/images/search.png';
 import penLine from '../../assets/images/pen-line.png';
 import calendarClock from '../../assets/images/calendar-clock.png';
 import neroImage from '../../assets/images/Nero2.0.jpg';
+import shieldCheck from '../../assets/icons/shield-check.png';
+import gem from '../../assets/icons/gem.png';
+import heartHandshake from '../../assets/icons/heart-handshake.png';
 import { useEffect, useRef } from 'react';
 
 export default function HowItWorks() {
@@ -120,6 +123,50 @@ export default function HowItWorks() {
         </div>
         <div className={styles.aboutImage}>
           <img src={neroImage} alt="Ahdini Team" />
+        </div>
+      </section>
+
+      <section className={styles.promiseSection}>
+        <h2 className={styles.promiseTitle}>Our Promise to You</h2>
+        <p className={styles.promiseSubtitle}>The pillars that define the Ahdini experience.</p>
+        <div className={styles.promiseCards}>
+          <div className={styles.promiseCard}>
+            <div className={styles.promiseIcon}>
+              <img src={shieldCheck} alt="Trust & Reliability" />
+            </div>
+            <h3 className={styles.promiseCardTitle}>Trust & Reliability</h3>
+            <p className={styles.promiseCardText}>
+              We value your trust above all. Our delivery scheduling is precise, and our privacy standards are uncompromising.
+            </p>
+          </div>
+          <div className={styles.promiseCard}>
+            <div className={styles.promiseIcon}>
+              <img src={gem} alt="Premium Quality" />
+            </div>
+            <h3 className={styles.promiseCardTitle}>Premium Quality</h3>
+            <p className={styles.promiseCardText}>
+              Every product is hand-picked for quality and elegance. We partner with the finest artisans and brands.
+            </p>
+          </div>
+          <div className={styles.promiseCard}>
+            <div className={styles.promiseIcon}>
+              <img src={heartHandshake} alt="Emotional Intelligence" />
+            </div>
+            <h3 className={styles.promiseCardTitle}>Emotional Intelligence</h3>
+            <p className={styles.promiseCardText}>
+              We understand that a gift is a message. Our platform is designed to help you articulate your feelings perfectly.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.ctaSection}>
+        <div className={styles.ctaContent}>
+          <h2 className={styles.ctaTitle}>Ready to Make Someone's Day?</h2>
+          <p className={styles.ctaSubtitle}>
+            Join thousands of happy customers who have discovered the easiest way to send meaningful gifts.
+          </p>
+          <a href="/shop" className={styles.ctaBtn}>Browse Gifts</a>
         </div>
       </section>
 

@@ -16,9 +16,65 @@ class GiftController{
             "status"=>"success",
             "data"=>$gifts
         ]);
-}
+    }
 
-public function addGift(){
+    // Get single gift with all details
+    public function getGift($id) {
+        try {
+            // Get gift basic info with vendor
+            $gift = $this->giftModel->Read($id);
+            
+            if (!$gift) {
+                http_response_code(404);
+                echo json_encode([
+                    'status' => 'error',
+                    'message' => 'Gift not found'
+                ]);
+                return;
+            }
+
+            // Get media (images/videos)
+            $media = $this->giftModel->getMedia($id);
+            
+            // Get reviews
+            $reviews = $this->giftModel->getReviews($id);
+            
+            // Get rating stats
+            $ratingStats = $this->giftModel->getRatingStats($id);
+
+            // Combine all data
+            $gift['media'] = $media;
+            $gift['reviews'] = $reviews;
+            $gift['rating'] = $ratingStats['average_rating'] ? round($ratingStats['average_rating'], 1) : 0;
+            $gift['review_count'] = $ratingStats['review_count'];
+
+            // Create vendor object
+            if ($gift['vendor_name']) {
+                $gift['vendor'] = [
+                    'name' => $gift['vendor_name'],
+                    'logo' => $gift['vendor_logo'],
+                    'first_name' => $gift['vendor_first_name'],
+                    'last_name' => $gift['vendor_last_name'],
+                    'profile_img' => $gift['vendor_profile_img']
+                ];
+            } else {
+                $gift['vendor'] = null;
+            }
+
+            echo json_encode([
+                'status' => 'success',
+                'data' => $gift
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => 'Failed to fetch gift: ' . $e->getMessage()
+            ]);
+        }
+    }
+
+    public function addGift(){
       checkAdmin();  //check if user is authenticated do not remove it ****** security ******
         $data=json_decode(file_get_contents("php://input"),true);
         $result=$this->giftModel->create($data);
@@ -33,9 +89,9 @@ public function addGift(){
                 "message"=>"Failed to add gift"
             ]);
         }
-}
+    }
 
-public function deleteGift($id){
+    public function deleteGift($id){
       checkAdmin();
         $result=$this->giftModel->delete($id);
         if($result){
@@ -49,8 +105,9 @@ public function deleteGift($id){
                 "message"=>"Failed to delete gift"
             ]);
         }
-}
-public function updateGift($id){
+    }
+
+    public function updateGift($id){
       checkAdmin();
         $data=json_decode(file_get_contents("php://input"),true);
         $result=$this->giftModel->update($id, $data);
@@ -65,5 +122,5 @@ public function updateGift($id){
                 "message"=>"Failed to update gift"
             ]);
         }
-}
+    }
 }

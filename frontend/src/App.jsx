@@ -5,13 +5,11 @@ import Register from './pages/RegisterClient/RegisterClient';
 import Forgot from './pages/Forgot/Forgot';
 import Terms from './pages/terms/terms';
 import Home from './pages/Home/Home';
-import HowItWorks from './pages/HowItWorks/HowItWorks';
-import Home from './pages/Home/Home';
 import ToastPro from './components/UI/ToastPro';
 import HowItWorks from './pages/HowItWorks/HowItWorks';
 import RegisterVendor from './pages/RegisterVendor/RegisterVendor';
 import Gifts from './pages/Gifts/Gifts';
-import ToastPro from './components/UI/ToastPro';
+import Gift from './pages/Gift/Gift'; 
 
 
  
@@ -30,6 +28,7 @@ function App() {
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="/register-vendor" element={<RegisterVendor />} />
                 <Route path="/gifts" element={<Gifts />} />
+                <Route path="/gift/:id" element={<Gift />} />
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
                 <Route path="/how-it-works" element={<HowItWorks />} />

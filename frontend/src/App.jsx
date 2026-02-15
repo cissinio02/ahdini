@@ -6,12 +6,10 @@ import Forgot from './pages/Forgot/Forgot';
 import Terms from './pages/terms/terms';
 import Home from './pages/Home/Home';
 import HowItWorks from './pages/HowItWorks/HowItWorks';
+import ToastPro from './components/UI/ToastPro';
 import RegisterVendor from './pages/RegisterVendor/RegisterVendor';
 import Gifts from './pages/Gifts/Gifts';
-import ToastPro from './components/UI/ToastPro';
-import VendorDashboard from './pages/VendorDashbord/VendorDashboard';
-import AdminLogin from './pages/Admin/AdminLogin';
-import AdminPage from './pages/Admin/AdminPage';
+
 
 
  
@@ -30,9 +28,6 @@ function App() {
                 <Route path="/how-it-works" element={<HowItWorks />} />
                 <Route path="/register-vendor" element={<RegisterVendor />} />
                 <Route path="/gifts" element={<Gifts />} />
-                <Route path="/vendor-dashboard" element={<VendorDashboard />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin" element={<AdminPage />} />
                 <Route path="/" element={<Navigate to="/home" replace />} />
                 <Route path="*" element={<Navigate to="/home" replace />} />
               </Routes>

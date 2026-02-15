@@ -166,7 +166,7 @@ export default function HowItWorks() {
           <p className={styles.ctaSubtitle}>
             Join thousands of happy customers who have discovered the easiest way to send meaningful gifts.
           </p>
-          <a href="/shop" className={styles.ctaBtn}>Browse Gifts</a>
+          <a href="/gifts" className={styles.ctaBtn}>Browse Gifts</a>
         </div>
       </section>
 

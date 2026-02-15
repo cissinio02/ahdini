@@ -61,11 +61,63 @@ export default function RegisterVendor() {
         if (errors[field]) setErrors(prev => ({ ...prev, [field]: undefined }));
     };
 
+    // Validation helpers
+    const validateEmail = (email) => {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    };
+
+    const validatePassword = (password) => {
+        const rules = {
+            length: password.length >= 8,
+            upper: /[A-Z]/.test(password),
+            number: /[0-9]/.test(password),
+            special: /[\W]/.test(password),
+        };
+        return { ok: Object.values(rules).every(Boolean), rules };
+    };
+
+    const validatePhone = (phone) => {
+        // Allow digits, optional +, spaces and dashes; require at least 8 digits
+        const digits = phone.replace(/[^0-9]/g, '');
+        return digits.length >= 8;
+    };
+
     const handleNext = (e) => {
         e.preventDefault();
-        // Simple client-side check for Step 0
-        if (currentStep === 0 && (!formData.email || !formData.password)) {
-            showErrorToast('Required Fields', 'Please fill account details to proceed.');
+        // Step-specific validation
+        if (currentStep === 0) {
+            const nextErrors = {};
+            if (!formData.firstName) nextErrors.firstName = 'First name is required';
+            if (!formData.lastName) nextErrors.lastName = 'Last name is required';
+            if (!formData.email) nextErrors.email = 'Email is required';
+            else if (!validateEmail(formData.email)) nextErrors.email = 'Invalid email';
+            if (!formData.password) nextErrors.password = 'Password is required';
+            else {
+                const pass = validatePassword(formData.password);
+                if (!pass.ok) {
+                    nextErrors.password = 'Password must be 8+ chars, include uppercase, number and special char';
+                }
+            }
+            if (Object.keys(nextErrors).length) {
+                setErrors(nextErrors);
+                showErrorToast('Please fix the form', 'Some fields are invalid');
+                return;
+            }
+            setCurrentStep(prev => prev + 1);
+            return;
+        }
+        if (currentStep === 1) {
+            const nextErrors = {};
+            if (!formData.shopName) nextErrors.shopName = 'Shop name is required';
+            if (!formData.shopPhone) nextErrors.shopPhone = 'Business phone is required';
+            else if (!validatePhone(formData.shopPhone)) nextErrors.shopPhone = 'Invalid phone number';
+            if (!formData.shopLocation) nextErrors.shopLocation = 'Shop location is required';
+            if (Object.keys(nextErrors).length) {
+                setErrors(nextErrors);
+                showErrorToast('Please fix the form', 'Some fields are invalid');
+                return;
+            }
+            setCurrentStep(prev => prev + 1);
             return;
         }
         setCurrentStep(prev => prev + 1);
@@ -79,6 +131,28 @@ export default function RegisterVendor() {
             showErrorToast('Agreement required', 'You must accept the Terms of Service');
             return;
         }
+        // Final validation before submit
+        const finalErrors = {};
+        if (!formData.firstName) finalErrors.firstName = 'First name is required';
+        if (!formData.lastName) finalErrors.lastName = 'Last name is required';
+        if (!formData.email) finalErrors.email = 'Email is required';
+        else if (!validateEmail(formData.email)) finalErrors.email = 'Invalid email';
+        if (!formData.password) finalErrors.password = 'Password is required';
+        else {
+            const pass = validatePassword(formData.password);
+            if (!pass.ok) finalErrors.password = 'Password must be 8+ chars, include uppercase, number and special char';
+        }
+        if (!formData.shopName) finalErrors.shopName = 'Shop name is required';
+        if (!formData.shopPhone) finalErrors.shopPhone = 'Business phone is required';
+        else if (!validatePhone(formData.shopPhone)) finalErrors.shopPhone = 'Invalid phone number';
+        if (!formData.shopLocation) finalErrors.shopLocation = 'Shop location is required';
+
+        if (Object.keys(finalErrors).length) {
+            setErrors(finalErrors);
+            showErrorToast('Please fix the form', 'Some fields are invalid');
+            return;
+        }
+
         setLoading(true);
         try {
             // Logic: Backend must handle "vendor" registration (users + vendor tables)

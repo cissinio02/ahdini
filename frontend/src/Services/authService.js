@@ -11,6 +11,11 @@ const authService = {
 		return res.data;
 	},
 
+	registerVendor: async (formData) => {
+		const res = await api.post('register.php', formData);
+		return res.data;
+	},
+
 	me: async () => {
 		const res = await api.get('me.php');
 		return res.data;

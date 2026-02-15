@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { RefreshCw } from 'lucide-react';
 import Header from '../../components/layouts/Header/Header';
 import Footer from '../../components/layouts/Footer/Footer';
 import styles from './Gifts.module.css';
@@ -14,56 +15,69 @@ const Gifts = () => {
   const [deliveryOption, setDeliveryOption] = useState('');
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [sortBy, setSortBy] = useState('popularity');
   const PRODUCTS_PER_PAGE = 9;
 
-  // Fetch products from API on component mount
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        setLoading(true);
-        console.log('Fetching products from API...');
-        const response = await api.get('shop.php?action=get_gifts');
-        
-        console.log('API Response:', response);
-        console.log('Response status:', response.data.status);
-        console.log('Response data:', response.data.data);
-        
-        if (response.data.status === 'success' && Array.isArray(response.data.data)) {
-          console.log('Products found:', response.data.data.length);
-          // Transform API data to match component expectations
-          const transformedProducts = response.data.data.map(product => ({
-          id: product.id,
-          name: product.title,
-          category: product.category || 'Other',
-          description: product.description || '',
-          price: parseFloat(product.price),
-          image: product.image,
-          occasion: product.category || 'General',
-          createdAt: product.created_at // Make sure this matches the exact field name from API
-          }));
-          console.log('Transformed products:', transformedProducts);
-          setProducts(transformedProducts);
-          setError(null);
-        } else {
-          console.log('Unexpected response structure');
-          setProducts([]);
-          setError('Unexpected response format from server.');
-        }
-      } catch (err) {
-        console.error('Error fetching products:', err);
-        console.error('Error message:', err.message);
-        console.error('Error response:', err.response);
-        setError(`Failed to load products: ${err.message}`);
+  // Fetch products from API
+  const fetchProducts = async () => {
+    try {
+      setRefreshing(true);
+      console.log('Fetching products from API...');
+      const response = await api.get('shop.php?action=get_gifts');
+      
+      console.log('API Response:', response);
+      console.log('Response status:', response.data.status);
+      console.log('Response data:', response.data.data);
+      
+      if (response.data.status === 'success' && Array.isArray(response.data.data)) {
+        console.log('Products found:', response.data.data.length);
+        // Transform API data to match component expectations
+        const transformedProducts = response.data.data.map(product => ({
+        id: product.id,
+        name: product.title,
+        category: product.category || 'Other',
+        description: product.description || '',
+        price: parseFloat(product.price),
+        image: product.image,
+        occasion: product.category || 'General',
+        createdAt: product.created_at // Make sure this matches the exact field name from API
+        }));
+        console.log('Transformed products:', transformedProducts);
+        setProducts(transformedProducts);
+        setError(null);
+      } else {
+        console.log('Unexpected response structure');
         setProducts([]);
-      } finally {
-        setLoading(false);
+        setError('Unexpected response format from server.');
       }
-    };
+    } catch (err) {
+      console.error('Error fetching products:', err);
+      console.error('Error message:', err.message);
+      console.error('Error response:', err.response);
+      setError(`Failed to load products: ${err.message}`);
+      setProducts([]);
+    } finally {
+      setRefreshing(false);
+      setLoading(false);
+    }
+  };
 
+  // Fetch products on component mount
+  useEffect(() => {
     fetchProducts();
+  }, []);
+
+  // Auto-refresh gifts every 30 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      console.log('Auto-refreshing gift list...');
+      fetchProducts();
+    }, 30000); // 30 seconds
+
+    return () => clearInterval(interval);
   }, []);
 
   // Dynamically get unique categories from products
@@ -297,17 +311,48 @@ const Gifts = () => {
                 <p className={styles.resultCount}>
                   {loading ? 'Loading...' : `Showing ${sortedProducts.length > 0 ? startIndex + 1 : 0}-${Math.min(endIndex, sortedProducts.length)} of ${sortedProducts.length} products`}
                 </p>
-                <select 
-                  className={styles.sortSelect}
-                  value={sortBy}
-                  onChange={handleSortChange}
-                >
-                  <option value="popularity">Sort by: Popularity</option>
-                  <option value="price_low">Price: Low to High</option>
-                  <option value="price_high">Price: High to Low</option>
-                  <option value="newest">Newest</option>
-                </select>
+                <div style={{display: 'flex', gap: '10px', alignItems: 'center'}}>
+                  <select 
+                    className={styles.sortSelect}
+                    value={sortBy}
+                    onChange={handleSortChange}
+                  >
+                    <option value="popularity">Sort by: Popularity</option>
+                    <option value="price_low">Price: Low to High</option>
+                    <option value="price_high">Price: High to Low</option>
+                    <option value="newest">Newest</option>
+                  </select>
+                  
+                  <button 
+                    onClick={fetchProducts}
+                    disabled={refreshing}
+                    style={{
+                      padding: '8px 12px',
+                      background: refreshing ? '#ccc' : '#2196F3',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      cursor: refreshing ? 'not-allowed' : 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '6px',
+                      fontSize: '14px',
+                      fontWeight: '500'
+                    }}
+                    title="Refresh gift list to see new items"
+                  >
+                    <RefreshCw size={16} style={{animation: refreshing ? 'spin 1s linear infinite' : 'none'}} />
+                    {refreshing ? 'Refreshing...' : 'Refresh'}
+                  </button>
+                </div>
               </div>
+
+              <style>{`
+                @keyframes spin {
+                  from { transform: rotate(0deg); }
+                  to { transform: rotate(360deg); }
+                }
+              `}</style>
 
               <div className={styles.productsGrid}>
                 {loading ? (

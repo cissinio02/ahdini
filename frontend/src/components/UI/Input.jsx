@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Input({ label, id, type = 'text', value, onChange, placeholder = '', className = '', error, showPasswordToggle = false }) {
+export default function Input({ label, id, type = 'text', value, onChange, placeholder = '', className = '', error, name = '', showPasswordToggle = false }) {
 	const [visible, setVisible] = useState(false);
 	const [hovered, setHovered] = useState(false);
 	const [focused, setFocused] = useState(false);
@@ -31,6 +31,7 @@ export default function Input({ label, id, type = 'text', value, onChange, place
 			<div style={{ position: 'relative' }} onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
 				<input
 					id={id}
+					name={name}
 					type={inputType}
 					value={value}
 					onChange={onChange}

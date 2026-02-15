@@ -1,5 +1,8 @@
 <?php
-header('access-control-allow-origin: http://localhost:5173');//allow requests from frontend
+$origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '';
+if (preg_match('/^http:\/\/localhost:\d+$/', $origin)) {
+    header('Access-Control-Allow-Origin: ' . $origin);
+}
 header('access-control-allow-credentials: true');//allow cookies
 header('content-type: application/json');//response type
 require_once __DIR__ . '/../controllers/AuthController.php'; //import AuthController

@@ -5,7 +5,7 @@ import {user} from '../../assets/images/images';
 import api from '../../api/axios';
 import { showSuccessToast, showErrorToast } from '../../components/UI/ToastPro';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../../components/UI/button';
 import Input from '../../components/UI/Input';
 
@@ -16,35 +16,77 @@ const Login = () => {
     const [loading, setLoading] = useState(false);
        const [errors, setErrors] = useState({});
 
+    const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         const loadingId = toast.loading('Logging in...');
         try {
             const res = await api.post('login.php', { email, password });
-            // Dismiss loading toast (request completed)
+            console.log('Login response:', res.data);
+            
+            // Normalize response (may be string or object)
+            let data = res.data;
+            if (typeof data === 'string') {
+                try {
+                    data = JSON.parse(data);
+                } catch (err) {
+                    // Try to extract JSON from HTML-wrapped response
+                    const match = data.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+                    if (match) {
+                        try {
+                            data = JSON.parse(match[0]);
+                            console.info('Extracted JSON from HTML response');
+                        } catch (err2) {
+                            console.error('Failed to extract JSON:', err2);
+                        }
+                    }
+                }
+            }
+            
+            // Dismiss loading toast
             toast.dismiss(loadingId);
             setLoading(false);
 
-            if (res.data && res.data.status === 'success') {
-                showSuccessToast('Logged in successfully', res.data.user?.name || '');
-                localStorage.setItem('user', JSON.stringify(res.data.user));
-                setTimeout(() => (window.location.href = '../Home'), 1400);
+            if (data && data.status === 'success') {
+                showSuccessToast('Logged in successfully', data.user?.name || '');
+                localStorage.setItem('user', JSON.stringify(data.user));
+                
+                // Redirect based on user role
+                if (data.user?.role === 'vendor') {
+                    navigate('/vendor-dashboard');
+                } else if (data.user?.role === 'admin') {
+                    navigate('/admin');
+                } else {
+                    navigate('/home');
+                }
             } else {
-                    if (res.data?.errors) {
-                        setErrors(res.data.errors);
-                        showErrorToast('Login failed', res.data.message || 'Please fix the highlighted fields');
-                    } else {
-                        showErrorToast('Login failed', res.data?.message || 'Unknown error');
-                    }
+                if (data?.errors) {
+                    setErrors(data.errors);
+                    showErrorToast('Login failed', data.message || 'Please fix the highlighted fields');
+                } else {
+                    showErrorToast('Login failed', data?.message || 'Unknown error');
+                }
             }
         } catch (error) {
             toast.dismiss(loadingId);
             setLoading(false);
             console.error('Login error:', error);
             if (error?.response) {
-                if (error.response.data?.errors) setErrors(error.response.data.errors);
-                showErrorToast('Error', error.response.data?.message || 'Server error');
+                let errData = error.response.data;
+                if (typeof errData === 'string') {
+                    try {
+                        errData = JSON.parse(errData);
+                    } catch (e) {
+                        const m = errData.match(/(\{[\s\S]*\}|\[[\s\S]*\])/);
+                        if (m) {
+                            try { errData = JSON.parse(m[0]); } catch (e2) { }
+                        }
+                    }
+                }
+                if (errData?.errors) setErrors(errData.errors);
+                showErrorToast('Error', errData?.message || 'Server error');
             } else {
                 showErrorToast('Network error', 'Please check if your backend server is running and CORS is enabled.');
             }

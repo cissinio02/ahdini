@@ -1,8 +1,0 @@
-### تجربة تسجيل الدخول
-POST http://localhost/ahdini/backend/api/login.php
-Content-Type: application/json
-
- {
-"email": "bouregaayacine00@gmail.com",
-"password": "Yasser0421@"
-}

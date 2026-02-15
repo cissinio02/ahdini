@@ -45,7 +45,7 @@ const Header = () => {
       <div className={styles.container}>
         <div className={styles.logo}>
           <img src={logo_grenas} alt="Ahdini Logo" />
-          <Link to="/home" style={{ textDecoration: 'none' }}><span>Ahdini</span></Link>
+          <Link to="/vendor-dashboard" style={{ textDecoration: 'none' }}><span>Ahdini</span></Link>
         </div>
 
         {}

@@ -1,0 +1,80 @@
+.container {
+    padding: 2rem;
+}
+
+.container h2 {
+    margin-top: 0;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.periodSelector {
+    display: flex;
+    gap: 1rem;
+}
+
+.periodSelector select {
+    padding: 0.8rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    background: white;
+    cursor: pointer;
+}
+
+.metricsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.metricCard {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.metricIcon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.metricCard h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 500;
+}
+
+.metricValue {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 0.5rem 0;
+}
+
+.metricChange {
+    color: #4CAF50;
+    font-size: 0.9rem;
+}
+
+.chartPlaceholder {
+    background: white;
+    border-radius: 12px;
+    padding: 3rem;
+    text-align: center;
+    color: #999;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

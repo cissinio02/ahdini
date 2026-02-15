@@ -20,7 +20,6 @@ function checkAdmin() {
     
     checkAuth();
 
-
     if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
         http_response_code(403); // Forbidden access
         echo json_encode([
@@ -30,4 +29,21 @@ function checkAdmin() {
         exit();
     }
 }
+
+// 3. Middleware to check if user is Vendor (or Admin)
+function checkVendor() {
+    // First, ensure the user is authenticated
+    checkAuth();
+
+    // Then check if the user has the 'vendor' role (or admin)
+    if (!isset($_SESSION['role']) || ($_SESSION['role'] !== 'vendor' && $_SESSION['role'] !== 'admin')) {
+        http_response_code(403); // Forbidden access
+        echo json_encode([
+            "status" => "error",
+            "message" => "Forbidden access. Vendors only."
+        ]);
+        exit();
+    }
+}
+?>
 

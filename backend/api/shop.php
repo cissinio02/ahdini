@@ -2,9 +2,20 @@
         error_reporting(E_ALL);
         ini_set('display_errors', 0);
 
-        header("Access-Control-Allow-Origin: *");
+        // CORS: allow a whitelist of local dev origins
+        $allowed_origins = [
+            'http://localhost:5173',
+            'http://localhost:5174',
+            'http://localhost:5175',
+        ];
+        $origin = $_SERVER['HTTP_ORIGIN'] ?? '';
+        if (in_array($origin, $allowed_origins, true)) {
+            header('Access-Control-Allow-Origin: ' . $origin);
+        }
+        header('Vary: Origin');
         header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+        header('Access-Control-Allow-Credentials: true');
         header("Content-Type: application/json; charset=UTF-8");
 
 // Handle preflight requests
